@@ -1,0 +1,249 @@
+CLEAR scree
+SET VERIFY OFF;
+SET SERVEROUTPUT ON;
+DROP TABLE INPUT_WORD CASCADE CONSTRAINTS;
+
+
+CREATE or REPLACE FUNCTION right_possition(a in char, b in char)
+RETURN int
+is
+c int;
+
+begin
+c:=0;
+IF (a=b ) then
+  C:=1;
+  end if;
+ 
+ RETURN c;
+end right_possition;
+/
+
+
+CREATE TABLE INPUT_WORD(
+        num int, 
+		FIR char(1),
+		SEC char(1),	
+		THI char(1),	
+		FORT char(1),
+	    FIF char(1),	
+        PRIMARY KEY(num));
+		
+	
+
+	
+SELECT * FROM WORDLIST;
+SELECT * FROM TEMP; 
+
+ACCEPT X  CHAR PROMPT "ENTER FIRST ALPHABET="
+ACCEPT Y  CHAR PROMPT "ENTER SECOND ALPHABET="
+ACCEPT Z  CHAR PROMPT "ENTER THIRD ALPHABET="
+ACCEPT V  CHAR PROMPT "ENTER FORTH ALPHABET="
+ACCEPT W  CHAR PROMPT "ENTER FIFTH ALPHABET="
+
+
+DECLARE
+C CHAR(1);
+D CHAR(1);
+E CHAR(1);
+F CHAR(1);
+G CHAR(1);
+n int;
+b int;
+z int;
+A1 CHAR(1);
+A2 CHAR(1);
+A3 CHAR(1);
+A4 CHAR(1); 
+A5 CHAR(1);
+
+R1 CHAR(1);
+R2 CHAR(1);
+R3 CHAR(1);
+R4 CHAR(1);
+R5 CHAR(1);
+
+C1 int;
+C12 int;
+
+D1 int;
+D12 int;
+E1 int;
+E12 int;
+F1 int;
+F12 int;
+G1 int;
+G12 int;
+
+
+
+
+BEGIN
+ C:= '&X';
+ D:= '&Y';
+ E:= '&Z';
+ F:= '&V';
+ G:= '&W';
+ 
+ C1:=0;
+ C12:=0;
+ 
+ D1:=0;
+ D12:=0;
+ E1:=0;
+ E12:=0;
+ F1:=0;
+ F12:=0;
+ G1:=0;
+ G12:=0;
+ 
+ 
+
+
+/* DBMS_OUTPUT.PUT_LINE(C);
+ DBMS_OUTPUT.PUT_LINE(D);
+ DBMS_OUTPUT.PUT_LINE(E);*/
+ 
+ INSERT INTO INPUT_WORD VALUES (1,C,D,E,F,G);
+ 
+ select num1,num2 into b,n from TEMP where num3=1;
+ select snum into z from wordlist where(fir=c and sec=d and thi=e and fort=f and fif= g);
+ if (z>0) then
+ 
+ if (b=0)then
+ n := dbms_random.value(1,10);
+ 
+ update TEMP set num2=N where num3=1;
+ DBMS_OUTPUT.PUT_LINE(N);
+ end if;
+ 
+ SELECT FIR ,SEC ,THI,FORT,FIF INTO A1,A2,A3,A4,A5 FROM WORDLIST WHERE SNUM=3;	
+ /*R1:=A1;
+ R2:=A2;
+ R3:=A3;
+ R4:=A4;
+ R5:=A5;*/
+ BEGIN
+	b:=b+1;	
+	update TEMP set num1=b where num3=1;
+ IF (a1=C and a2=D and a3=E and a4=F and a5=G) then
+
+      DBMS_OUTPUT.PUT_LINE( CHR(10)||'Congratulation. You guess the right word');
+	  b:=0;
+	  update TEMP set num1=b, num2=0 where num3=1;
+
+ ELSE
+ c1:= right_possition (a1,C );
+ D1:= right_possition (a2,D );
+ E1:= right_possition (a3,E );
+ F1:= right_possition (a4,F );
+ G1:= right_possition (a5,G );
+ 
+  IF (C1=1 ) then
+  
+  A1:='@';
+  
+  end if;
+  IF (a2=D ) then
+  D1:=1;
+  A2:='@';
+  
+  end if;
+  IF (a3=E ) then
+  E1:=1;
+  A3:='@';
+  
+  end if;
+  IF (a4=F ) then
+  F1:=1;
+  A4:='@';
+ 
+  end if;
+  IF (a5=G ) then
+  G1:=1;
+  A5:='@';
+ 
+   end if;
+ 
+  
+  
+  IF (c1=1 ) then
+  
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| C ||' is in first alphabet');
+  ELSIF(a2=c OR a3=c OR a4=c OR a5=c ) then
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| c ||' is in the word but in wrong position');
+  ELSE
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| c ||' is not present in the word');
+  
+  end if;
+  
+  
+  IF (D1=1 ) then
+  
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| D ||' is in second alphabet');  
+  
+  ELSIF(a1=d OR a3=d OR a4=d OR a5=d ) then
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| d ||' is in the word but in wrong position');
+  ELSE
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| d ||' is not present in the word');
+  
+  end if;
+  
+  IF (E1=1 ) then
+  
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| E ||' is in third alphabet');
+  
+  ELSIF(a2=e OR a1=e OR a4=e OR a5=e ) then
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| e ||' is in the word but in wrong position');
+  ELSE
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| e ||' is not present in the word');
+  end if;
+  
+  IF (F1=1 ) then
+ 
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| F ||' is in forth alphabet');
+ 
+  ELSIF(a2=f OR a3=f OR a1=f OR a5=f ) then
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| f ||'  is in the word but in wrong position');
+  ELSE
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| f ||' is not present in the word');
+  end if;
+  
+  IF (G1=1 ) then
+  
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| G ||' is in fifth alphabet');
+  ELSIF(a2=g OR a3=g OR a4=g OR a1=g ) then
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| g ||' is in the word but in wrong position');
+  ELSE
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| g ||' is not present in the word');
+  end if;
+  
+  /*A1:=R1;
+ A2:=R2;
+ A3:=R3;
+ A4:=R4;
+ A5:=R5;*/
+  
+ end if;
+  if (b=6) then
+  b:=0;
+  update TEMP set num1=b ,num2=0 where num3=1;
+  DBMS_OUTPUT.PUT_LINE(CHR(10)|| 'B==6');
+  
+  end if;
+ END; 
+ 
+ end if;
+ EXCEPTION
+   when OTHERS then
+   dbms_output.put_line('This word is not in the list');
+ 
+ 
+END;
+/
+COMMIT;
+
+SELECT * FROM INPUT_WORD;
+  SELECT *  FROM TEMP;
+
+
